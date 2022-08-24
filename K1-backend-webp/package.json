@@ -1,0 +1,26 @@
+{
+  "name": "realtimechatt_backend",
+  "version": "1.0.0",
+  "description": "The third and last assignment in the backend course. See readMe for more information",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "Backend",
+    "socketIO",
+    "NodeJS",
+    "Express",
+    "and",
+    "Sqlite3"
+  ],
+  "author": "Aleks Magnusson",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.1",
+    "socket.io": "^4.5.1",
+    "sqlite3": "^5.0.8",
+    "uuid": "^8.3.2"
+  }
+}
