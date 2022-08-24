@@ -1,7 +1,8 @@
 const express = require("express");
 const { fstat } = require("fs");
 const app = express();
-const port = 4000;
+const port = process.env.PORT;
+
 const http = require("http");
 const { Server } = require("socket.io");
 const server = http.createServer(app);
@@ -26,7 +27,7 @@ const username = {
 // Lägg till cors med socket.io
 const io = new Server(server, {
   cors: {
-    origin: "*",
+    origin: "https://k1-frontend-webp.herokuapp.com/",
     methods: ["GET", "POST"],
   },
 });
@@ -138,5 +139,7 @@ io.on("connection", (socket) => {
   });
 });
 
-io.listen(4000);
-console.log("Servern körs på port 4000, tryck CTRL + C för att avsluta.");
+io.listen(PORT);
+console.log(
+  "Servern körs på med SocketIO PORT, tryck CTRL + C för att avsluta."
+);

@@ -18,7 +18,7 @@ function getAllMessages(message) {
 // function /klassNamn/(samma data som i db.js)
 function addMessage(message, username, rooms, timestamp) {
   const sql =
-    "INSERT INTO messages (message, username, rooms, timestamp) VALUES ( ?, ?, ?, ?)";
+    "INSERT INTO messages (message, username, rooms, timestamp) VALUES ( $1, $2, $3, $4)";
   return new Promise((resolve, reject) => {
     db.run(sql, [message, username, rooms, timestamp], (error) => {
       if (error) {

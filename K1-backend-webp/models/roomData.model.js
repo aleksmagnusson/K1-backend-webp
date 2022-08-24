@@ -17,8 +17,8 @@ function getRooms() {
 
 // GET ONE ROOM, INSERT INTO rooms (room) VALUES ?.
 
-function addRoom(timestamp, rooms) {
-  const sql = "INSERT INTO rooms (timestamp, rooms) VALUES (?, ?)";
+async function addRoom(timestamp, rooms) {
+  const sql = "INSERT INTO rooms (timestamp, rooms) VALUES ($1, $2)";
   return new Promise((resolve, reject) => {
     db.run(sql, [timestamp, rooms], (error) => {
       if (error) {
@@ -33,7 +33,7 @@ function addRoom(timestamp, rooms) {
 // DELETE rooms, ta bort ett rum.
 
 function deleteRoom(room) {
-  const sql = "DELETE from rooms WHERE rooms = (?)";
+  const sql = "DELETE from rooms WHERE rooms = ($1)";
   return new Promise((resolve, reject) => {
     db.run(sql, [room], (error, rows) => {
       if (error) {

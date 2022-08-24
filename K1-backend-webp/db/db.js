@@ -1,15 +1,21 @@
-const sqlite3 = require("sqlite3").verbose();
+const { Client } = require("pg");
 
-const db = new sqlite3.Database("./sqlite.db", (error) => {
-  if (error) {
-    console.log(error.message);
-    throw error;
-  }
+const db = new Client({
+  ssl: {
+    rejectUnauthorized: false,
+  },
+  connectionString: "postgres://",
 });
+//  .Database("./sqlite.db", (error) => {
+//  if (error) {
+//    console.log(error.message);
+//    throw error;
+//  }
+//  });
 
 // SQL databas som hämtar tabell för id, meddelande, användare, rum och tid den skapades.
 const messageData = ` CREATE TABLE IF NOT EXISTS messages ( 
- id INTEGER PRIMARY KEY AUTOINCREMENT,
+ id SERIAL PRIMARY KEY AUTOINCREMENT,
  message TEXT,
  username TEXT,
  rooms TEXT,
@@ -18,7 +24,7 @@ const messageData = ` CREATE TABLE IF NOT EXISTS messages (
 
 // Databas för rum som hämtar id, rum, tid den skapades.
 const roomData = ` CREATE TABLE IF NOT EXISTS rooms (
-id INTEGER PRIMARY KEY AUTOINCREMENT,
+id SERIAL PRIMARY KEY AUTOINCREMENT,
 rooms TEXT UNIQUE,
 timestamp DATE
 )`;
@@ -42,14 +48,5 @@ db.run(roomData, (error) => {
     throw error;
   }
 });
-
-//db.run(userData, (error) => {
-//  if (error) {
-//    console.error(error.message);
-//    throw error;
-//  } else {
-//    console.log("userData databasen har redan blivit skapad");
-//  }
-//});
 
 module.exports = db;
