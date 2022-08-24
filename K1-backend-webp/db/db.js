@@ -4,7 +4,7 @@ const db = new Client({
   ssl: {
     rejectUnauthorized: false,
   },
-  connectionString: "postgres://",
+  connectionString: process.env.DATABASE_URL,
 });
 //  .Database("./sqlite.db", (error) => {
 //  if (error) {
@@ -35,14 +35,14 @@ timestamp DATE
 //  current_room TEXT
 // )`;
 
-db.run(messageData, (error) => {
+db.query(messageData, (error) => {
   if (error) {
     console.error(error.message);
     throw error;
   }
 });
 
-db.run(roomData, (error) => {
+db.query(roomData, (error) => {
   if (error) {
     console.error(error.message);
     throw error;

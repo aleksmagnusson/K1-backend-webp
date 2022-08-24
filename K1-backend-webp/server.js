@@ -27,8 +27,10 @@ const username = {
 // Lägg till cors med socket.io
 const io = new Server(server, {
   cors: {
-    origin: "https://k1-frontend-webp.herokuapp.com/",
+    origin: "*",
+    //    origin: "https://k1-frontend-webp.herokuapp.com/",
     methods: ["GET", "POST"],
+    credentials: true,
   },
 });
 
@@ -139,7 +141,7 @@ io.on("connection", (socket) => {
   });
 });
 
-io.listen(PORT);
+io.listen(port);
 console.log(
   "Servern körs på med SocketIO PORT, tryck CTRL + C för att avsluta."
 );

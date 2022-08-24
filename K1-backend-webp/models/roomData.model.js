@@ -2,47 +2,26 @@ const db = require("../db/db");
 
 // GET ALL ROOMS, SELECT * FROM rooms.
 
-function getRooms() {
+async function getRooms() {
   const sql = "SELECT * from rooms";
-  return new Promise((resolve, reject) => {
-    db.all(sql, (error, rows) => {
-      if (error) {
-        console.error(error.message);
-        reject(error);
-      }
-      resolve(rows);
-    });
-  });
+  const result = await db.query(sql);
+  return result.rows;
 }
 
 // GET ONE ROOM, INSERT INTO rooms (room) VALUES ?.
 
 async function addRoom(timestamp, rooms) {
   const sql = "INSERT INTO rooms (timestamp, rooms) VALUES ($1, $2)";
-  return new Promise((resolve, reject) => {
-    db.run(sql, [timestamp, rooms], (error) => {
-      if (error) {
-        console.error(error.message);
-        reject(error);
-      }
-      resolve();
-    });
-  });
+  const result = await db.query(sql, [timestamp, rooms]);
+  return result.rows;
 }
 
 // DELETE rooms, ta bort ett rum.
 
-function deleteRoom(room) {
+async function deleteRoom(room) {
   const sql = "DELETE from rooms WHERE rooms = ($1)";
-  return new Promise((resolve, reject) => {
-    db.run(sql, [room], (error, rows) => {
-      if (error) {
-        console.error(error.message);
-        reject(error);
-      }
-      resolve(rows);
-    });
-  });
+  const result = await db.query(sql, [room]);
+  return result.rows;
 }
 
 module.exports = {
