@@ -15,7 +15,7 @@ const db = new Client({
 
 // SQL databas som hämtar tabell för id, meddelande, användare, rum och tid den skapades.
 const messageData = ` CREATE TABLE IF NOT EXISTS messages ( 
- id SERIAL PRIMARY KEY AUTOINCREMENT,
+ id SERIAL PRIMARY KEY,
  message TEXT,
  username TEXT,
  rooms TEXT,
@@ -24,7 +24,7 @@ const messageData = ` CREATE TABLE IF NOT EXISTS messages (
 
 // Databas för rum som hämtar id, rum, tid den skapades.
 const roomData = ` CREATE TABLE IF NOT EXISTS rooms (
-id SERIAL PRIMARY KEY AUTOINCREMENT,
+id SERIAL PRIMARY KEY,
 rooms TEXT UNIQUE,
 timestamp DATE
 )`;
