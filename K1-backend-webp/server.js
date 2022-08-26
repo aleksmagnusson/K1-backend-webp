@@ -63,12 +63,12 @@ io.on("connection", (socket) => {
   });
 
   // Skapa rum med hjälp av socket.on.
-  socket.on("create_room", (room) => {
+  socket.on("create_room", async (room) => {
     console.log(`Rum "${room}" har skapats`);
 
     const timestamp = Date();
 
-    roomModel.addRoom(timestamp, room);
+    await roomModel.addRoom(timestamp, room);
     // Kallar på rum och skriver ut rooms(?).
     socket.emit("create_room", room);
   });
@@ -110,7 +110,7 @@ io.on("connection", (socket) => {
 
   // meddelanden
   // message är en "string".
-  socket.on("message", (message) => {
+  socket.on("message", async (message) => {
     // Koll om tomt meddelande.
     if (message.length === 0) {
       console.log("Du kan inte skicka ett tomt meddelande!");
@@ -119,7 +119,7 @@ io.on("connection", (socket) => {
 
       const timestamp = Date();
 
-      messageModel.addMessage(
+      await messageModel.addMessage(
         message,
         socket.username,
         socket.currentRoom,
