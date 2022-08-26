@@ -6,6 +6,7 @@ const db = new Client({
   },
   connectionString: process.env.DATABASE_URL,
 });
+db.connect();
 //  .Database("./sqlite.db", (error) => {
 //  if (error) {
 //    console.log(error.message);
