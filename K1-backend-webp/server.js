@@ -1,7 +1,7 @@
 const express = require("express");
 const { fstat } = require("fs");
 const app = express();
-const port = process.env.PORT;
+const PORT = process.env.PORT;
 
 const http = require("http");
 const { Server } = require("socket.io");
@@ -141,7 +141,5 @@ io.on("connection", (socket) => {
   });
 });
 
-io.listen(port);
-console.log(
-  "Servern körs på med SocketIO PORT, tryck CTRL + C för att avsluta."
-);
+io.listen(PORT);
+console.log("Servern körs på med SocketIO PORT, stäng sidan för att avsluta.");
